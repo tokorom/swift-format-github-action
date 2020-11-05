@@ -1,4 +1,4 @@
-FROM tokorom/swift-format:latest
+FROM tokorom/swift-format:5.3
 
 MAINTAINER tokorom
 
