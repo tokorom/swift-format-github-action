@@ -9,7 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - runs:
-      using: 'docker'
-      image: 'docker://tokorom/swift-format:latest'
-      entrypoint: ["swift-format", "lint", "--recurcive", "."]
+    - uses: tokorom/swift-format-github-action@sample

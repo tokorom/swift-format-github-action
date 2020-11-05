@@ -1,0 +1,9 @@
+name: 'Run swift-format'
+description: 'Run swift-format'
+branding:
+  icon: 'truck'
+  color: 'blue'
+runs:
+  using: 'docker'
+  image: 'docker://tokorom/swift-format:latest'
+  entrypoint: ["swift-format", "lint", "--recurcive", "."]
