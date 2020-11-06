@@ -5,25 +5,6 @@ on:
       - sample
 
 jobs:
-  format:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - uses: tokorom/swift-format-github-action@sample
-      with:
-        arguments: 'format --recursive --in-place .'
-    - run: 'git status | grep modified:'
-    - name: Create Pull Request
-      if: ${{ success() }}
-      uses: peter-evans/create-pull-request@v3
-      with:
-        commit-message: 'Automatically formatted by swift-format'
-        base: sample
-        branch: swift-format/patch
-        branch-suffix: timestamp
-        delete-branch: true
-        title: 'Automatically formatted by swift-format'
-        body: 'To merge into this branch, you need to follow the rules of swift-format.'
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -33,13 +14,5 @@ jobs:
         arguments: 'format --recursive --in-place .'
     - uses: tokorom/swift-format-github-action@sample
       with:
-        arguments: 'lint --recursive . 2>&1 | grep .swift > problems.txt'
-    - run: 'cat problems.txt | grep .swift'
-    - name: Report a issue
-      if: ${{ success() }}
-      uses: nashmaniac/create-issue-action@v1.1
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        assignees: ${{ github.actor }}
-        title: 'There is still a problem with automatic formatting'
-        body: 'There are still issues reported by `swift-format lint` that cannot be formatted automatically, so please fix them manually.'
+        arguments: 'lint --recursive . &>problems.txt'
+    - run: 'cat problems.txt'
