@@ -33,7 +33,7 @@ jobs:
         arguments: 'format --recursive --in-place .'
     - uses: tokorom/swift-format-github-action@sample
       with:
-        arguments: 'lint --recursive . 2>problems.txt'
+        arguments: 'lint --recursive . 2>&1 | grep .swift > problems.txt'
     - run: 'cat problems.txt | grep .swift'
     - name: Report a issue
       if: ${{ success() }}
