@@ -7,10 +7,12 @@ inputs:
   arguments:
     description: 'swift-format command arguments'
     required: true
+  outputfile:
+    description: 'output destination files'
+    required: false
 runs:
   using: 'docker'
   image: 'docker://tokorom/swift-format:latest'
   env:
     SWIFT_FORMAT_ARGUMENTS: ${{ inputs.arguments }}
-  args:
-    - ''
+    SWIFT_FORMAT_OUTPUTFILE: ${{ inputs.outputfile }}

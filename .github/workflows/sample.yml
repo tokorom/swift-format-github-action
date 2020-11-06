@@ -14,5 +14,6 @@ jobs:
         arguments: 'format --recursive --in-place .'
     - uses: tokorom/swift-format-github-action@sample
       with:
-        arguments: 'lint --recursive . &>problems.txt'
+        arguments: 'lint --recursive .'
+        outputfile: 'problems.txt'
     - run: 'cat problems.txt'
