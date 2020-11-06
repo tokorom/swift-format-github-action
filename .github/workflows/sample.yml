@@ -11,6 +11,9 @@ jobs:
     - uses: actions/checkout@v1
     - uses: tokorom/swift-format-github-action@sample
       with:
+        arguments: 'lint --recursive .'
+    - uses: tokorom/swift-format-github-action@sample
+      with:
         arguments: 'format --recursive --in-place .'
     - run: 'git status | grep modified:'
     - name: Create Pull Request
@@ -24,3 +27,14 @@ jobs:
         delete-branch: true
         title: 'Automatically formatted by swift-format'
         body: 'To merge into this branch, you need to follow the rules of swift-format.'
+    - name: Check for lines that cannot be auto-formatted 
+      if: ${{ failure() }}
+      run: swift-format lint --recursive . 2>&1 | grep .swift
+    - name: Report a issue
+      if: ${{ success() }}
+      uses: nashmaniac/create-issue-action@v1.1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        assignees: ${{ github.actor }}
+        title: 'There is still a problem with automatic formatting'
+        body: 'There are still issues reported by `swift-format lint` that cannot be formatted automatically, so please fix them manually.'
