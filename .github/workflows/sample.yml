@@ -1,4 +1,4 @@
-name: Danger
+name: swift-format
 on:
   push:
     branches:
