@@ -1,7 +1,7 @@
-import B
 import A
+import B
 
-class Sample{
-    let item:Item
-    let Upper:Item
+class Sample {
+  let item: Item
+  let Upper: Item
 }
