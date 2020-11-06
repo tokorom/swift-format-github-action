@@ -20,6 +20,7 @@ jobs:
         commit-message: 'Automatically formatted by swift-format'
         base: sample
         branch: swift-format/patch
+        branch-suffix: timestamp
         delete-branch: true
         title: 'Automatically formatted by swift-format'
-        body: ''
+        body: 'To merge into this branch, you need to follow the rules of swift-format.'
