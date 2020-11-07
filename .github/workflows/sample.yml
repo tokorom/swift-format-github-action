@@ -30,7 +30,9 @@ jobs:
       with:
         arguments: 'lint --recursive .'
         outputfile: 'problems.txt'
-    - run: 'cat problems.txt | grep .swift'
+    - name: Replace problems.txt
+      if: ${{ success() }}
+      run: 'cat problems.txt | grep .swift | sed "s/^\\/github\\/workspace\\///" > problems.txt'
     - name: Read problems.txt
       if: ${{ success() }}
       id: problems
