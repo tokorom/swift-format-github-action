@@ -1,8 +1,6 @@
-import A
 import B
+import A
 
-class Sample {
-  let item: Item
-  let Upper: Item
-  var Upper2: Item
+class Sample{
+    let item:Item
 }
