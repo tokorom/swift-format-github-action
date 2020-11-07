@@ -45,6 +45,6 @@ jobs:
         assignees: ${{ github.actor }}
         title: 'There is still a problem with automatic formatting'
         body: |
-          'There are still issues reported by `swift-format lint` that cannot be formatted automatically, so please fix them manually.'
-          ''
+          There are still issues reported by `swift-format lint` that cannot be formatted automatically, so please fix them manually.
+          
           ${{ steps.problems.outputs.content }}
