@@ -32,13 +32,13 @@ jobs:
         outputfile: 'problems.txt'
     - name: Replace problems.txt
       if: ${{ success() }}
-      run: 'cat problems.txt | grep .swift | sed "s/^\\/github\\/workspace\\///" > problems.txt'
+      run: 'cat problems.txt | grep .swift | sed "s/^\\/github\\/workspace\\///" > problems-replaced.txt'
     - name: Read problems.txt
       if: ${{ success() }}
       id: problems
       uses: juliangruber/read-file-action@v1
       with:
-        path: ./problems.txt
+        path: ./problems-replaced.txt
     - name: Report a issue
       if: ${{ success() }}
       uses: nashmaniac/create-issue-action@v1.1
