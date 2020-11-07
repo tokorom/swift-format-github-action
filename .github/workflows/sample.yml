@@ -15,9 +15,11 @@ jobs:
         arguments: 'format --recursive --in-place .'
     - name: Get number of formatted lines
       id: modified_count
-      run: 'git status | grep modified: | wc -l | xargs'
+      run: |
+        lines=$(git status | grep modified: | wc -l | xargs)
+        echo "::set-output name=LINES::$lines"
     - name: Create Pull Request
-      if: steps.modified_count.outputs != '0'
+      if: steps.modified_count.outputs.LINES != '0'
       uses: peter-evans/create-pull-request@v3
       with:
         commit-message: 'Automatically formatted by swift-format'
@@ -34,18 +36,20 @@ jobs:
         outputfile: 'problems.txt'
     - name: Get number of problem lines
       id: problem_count
-      run: 'cat problems.txt | wc -l | xargs'
+      run: |
+        lines=$(cat problems.txt | wc -l | xargs)
+        echo "::set-output name=LINES::$lines"
     - name: Replace problems.txt
-      if: steps.problem_count.outputs != '0'
+      if: steps.problem_count.outputs.LINES != '0'
       run: 'cat problems.txt | grep .swift | sed "s/^\\/github\\/workspace\\///" > problems-replaced.txt'
     - name: Read problems.txt
-      if: steps.problem_count.outputs != '0'
+      if: steps.problem_count.outputs.LINES != '0'
       id: problems
       uses: juliangruber/read-file-action@v1
       with:
         path: ./problems-replaced.txt
     - name: Report a issue
-      if: steps.problem_count.outputs != '0'
+      if: steps.problem_count.outputs.LINES != '0'
       uses: nashmaniac/create-issue-action@v1.1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
