@@ -12,7 +12,7 @@ inputs:
     required: false
 runs:
   using: 'docker'
-  image: 'docker://tokorom/swift-format:latest'
+  image: 'docker://tokorom/swift-format:5.5'
   env:
     SWIFT_FORMAT_ARGUMENTS: ${{ inputs.arguments }}
     SWIFT_FORMAT_OUTPUTFILE: ${{ inputs.outputfile }}
