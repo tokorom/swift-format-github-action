@@ -2,11 +2,11 @@
 
 ## Matching swift-format-github-action to Your swift-format Version
 
-swift-format Version | branch |
---- | ---- |
-latest | main |
-5.6 | swift-5.6-branch |
-5.5 | swift-5.5-branch |
+swift-format Version | branch | tag |
+--- | --- | --- |
+latest | main | - |
+5.6 | swift-5.6-branch | 5.6 |
+5.5 | swift-5.5-branch | 5.5 |
 
 ## Related repos
 
